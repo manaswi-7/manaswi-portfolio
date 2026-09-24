@@ -43,13 +43,32 @@ const projects: ProjectData[] = [
 
 const skills = {
   Languages: ["C", "Java", "Python", "SQL"],
-  "AI / ML": ["TensorFlow", "Keras", "OpenCV", "NumPy", "Matplotlib"],
+  "AI / ML": [
+    "TensorFlow",
+    "OpenCV",
+    "NumPy",
+    "Matplotlib",
+    "Scikit-learn",
+  ],
+  "Generative AI": [
+    "Generative AI",
+    "RAG",
+    "Prompt Engineering",
+    "LLMs",
+    "Google Gemini",
+    "AI Tools",
+  ],
   Web: ["HTML", "CSS", "JavaScript", "React", "Next.js"],
   "Core CS": ["DSA", "OOP", "DBMS", "OS", "Computer Networks"],
-  Tools: ["Git", "GitHub", "VS Code", "Jupyter Notebook"],
-  Other: ["Streamlit", "Blockchain"],
+  Tools: [
+    "Git",
+    "GitHub",
+    "VS Code",
+    "Jupyter Notebook",
+    "Streamlit",
+  ],
+  Other: ["Blockchain", "Computer Vision"],
 };
-
 export default function Home() {
   const [openWindows, setOpenWindows] = useState<WindowName[]>([]);
   const [activeWindow, setActiveWindow] = useState<WindowName | null>(null);
@@ -163,8 +182,8 @@ export default function Home() {
 
       case "contact":
         output = [
-          "Email: Add your email",
-          "LinkedIn: Add your LinkedIn",
+          "Email: manaswibichala@gmail.com",
+          "GitHub: github.com/manaswi-7",
         ];
         break;
 
@@ -180,11 +199,7 @@ export default function Home() {
         ];
     }
 
-    setTerminalHistory((prev) => [
-      ...prev,
-      `$ ${command}`,
-      ...output,
-    ]);
+    setTerminalHistory((prev) => [...prev, `$ ${command}`, ...output]);
 
     setTerminalInput("");
   };
@@ -233,9 +248,7 @@ export default function Home() {
         {/* HERO */}
         <div className="mx-auto max-w-6xl px-6 pb-8 pt-16">
           <div className="max-w-3xl">
-            <p className="font-mono text-sm text-emerald-400">
-              $ whoami
-            </p>
+            <p className="font-mono text-sm text-emerald-400">$ whoami</p>
 
             <h1 className="mt-3 text-6xl font-bold tracking-tight">
               Manaswi<span className="text-emerald-400">.</span>
@@ -336,9 +349,7 @@ export default function Home() {
             onFocus={() => setActiveWindow(windowName)}
             onClose={() => closeWindow(windowName)}
           >
-            {windowName === "projects" && (
-              <ProjectsContent />
-            )}
+            {windowName === "projects" && <ProjectsContent />}
 
             {windowName === "terminal" && (
               <TerminalContent
@@ -458,9 +469,7 @@ function Window({
             <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
           </div>
 
-          <span className="font-mono text-xs text-gray-400">
-            {title}
-          </span>
+          <span className="font-mono text-xs text-gray-400">{title}</span>
         </div>
 
         <button
@@ -474,9 +483,7 @@ function Window({
         </button>
       </div>
 
-      <div className="max-h-[70vh] overflow-y-auto p-6">
-        {children}
-      </div>
+      <div className="max-h-[70vh] overflow-y-auto p-6">{children}</div>
     </div>
   );
 }
@@ -488,13 +495,9 @@ function Window({
 function ProjectsContent() {
   return (
     <div>
-      <p className="font-mono text-sm text-emerald-400">
-        ~/projects
-      </p>
+      <p className="font-mono text-sm text-emerald-400">~/projects</p>
 
-      <h2 className="mt-2 text-3xl font-bold">
-        Selected Projects
-      </h2>
+      <h2 className="mt-2 text-3xl font-bold">Selected Projects</h2>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {projects.map((project) => (
@@ -502,9 +505,7 @@ function ProjectsContent() {
             key={project.name}
             className="rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-emerald-400/20 hover:bg-white/[0.05]"
           >
-            <h3 className="font-semibold text-white">
-              {project.name}
-            </h3>
+            <h3 className="font-semibold text-white">{project.name}</h3>
 
             <p className="mt-3 text-sm leading-6 text-gray-400">
               {project.description}
@@ -551,9 +552,7 @@ function TerminalContent({
   history: string[];
   input: string;
   setInput: (value: string) => void;
-  onKeyDown: (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => void;
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className="font-mono text-sm">
@@ -561,11 +560,7 @@ function TerminalContent({
         {history.map((line, index) => (
           <div
             key={`${line}-${index}`}
-            className={
-              line.startsWith("$")
-                ? "text-emerald-400"
-                : ""
-            }
+            className={line.startsWith("$") ? "text-emerald-400" : ""}
           >
             {line || "\u00A0"}
           </div>
@@ -595,24 +590,19 @@ function TerminalContent({
 function AboutContent() {
   return (
     <div>
-      <p className="font-mono text-sm text-emerald-400">
-        ~/about
-      </p>
+      <p className="font-mono text-sm text-emerald-400">~/about</p>
 
-      <h2 className="mt-2 text-3xl font-bold">
-        About Me
-      </h2>
+      <h2 className="mt-2 text-3xl font-bold">About Me</h2>
 
       <p className="mt-5 max-w-2xl leading-7 text-gray-400">
-        I&apos;m Manaswi, a 4th-year Computer Science and
-        Engineering student at G. Narayanamma Institute of
-        Technology and Science.
+        I&apos;m Manaswi, a 4th-year Computer Science and Engineering student
+        at G. Narayanamma Institute of Technology and Science.
       </p>
 
       <p className="mt-4 max-w-2xl leading-7 text-gray-400">
-        I enjoy building practical software projects and
-        exploring areas such as artificial intelligence,
-        machine learning, computer vision and web development.
+        I enjoy building practical software projects and exploring areas such
+        as artificial intelligence, machine learning, computer vision and web
+        development.
       </p>
 
       <p className="mt-4 font-mono text-sm text-emerald-300">
@@ -629,13 +619,9 @@ function AboutContent() {
 function SkillsContent() {
   return (
     <div>
-      <p className="font-mono text-sm text-emerald-400">
-        ~/skills
-      </p>
+      <p className="font-mono text-sm text-emerald-400">~/skills</p>
 
-      <h2 className="mt-2 text-3xl font-bold">
-        Technical Skills
-      </h2>
+      <h2 className="mt-2 text-3xl font-bold">Technical Skills</h2>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {Object.entries(skills).map(([category, items]) => (
@@ -643,9 +629,7 @@ function SkillsContent() {
             key={category}
             className="rounded-xl border border-white/10 bg-white/[0.03] p-5"
           >
-            <h3 className="font-mono text-sm text-emerald-300">
-              {category}
-            </h3>
+            <h3 className="font-mono text-sm text-emerald-300">{category}</h3>
 
             <div className="mt-4 flex flex-wrap gap-2">
               {items.map((skill) => (
@@ -671,19 +655,13 @@ function SkillsContent() {
 function EducationContent() {
   return (
     <div>
-      <p className="font-mono text-sm text-emerald-400">
-        ~/education
-      </p>
+      <p className="font-mono text-sm text-emerald-400">~/education</p>
 
-      <h2 className="mt-2 text-3xl font-bold">
-        Education
-      </h2>
+      <h2 className="mt-2 text-3xl font-bold">Education</h2>
 
       <div className="mt-6 space-y-4">
         <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-          <p className="font-mono text-sm text-emerald-300">
-            2023 — 2027
-          </p>
+          <p className="font-mono text-sm text-emerald-300">2023 — 2027</p>
 
           <h3 className="mt-2 text-xl font-semibold">
             B.Tech — Computer Science & Engineering
@@ -699,13 +677,9 @@ function EducationContent() {
         </div>
 
         <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-          <p className="font-mono text-sm text-emerald-300">
-            2021 — 2023
-          </p>
+          <p className="font-mono text-sm text-emerald-300">2021 — 2023</p>
 
-          <h3 className="mt-2 text-xl font-semibold">
-            Intermediate
-          </h3>
+          <h3 className="mt-2 text-xl font-semibold">Intermediate</h3>
 
           <p className="mt-2 text-gray-400">
             Sri Chaitanya Junior College
@@ -723,34 +697,21 @@ function EducationContent() {
 function ContactContent() {
   return (
     <div>
-      <p className="font-mono text-sm text-emerald-400">
-        ~/contact
-      </p>
+      <p className="font-mono text-sm text-emerald-400">~/contact</p>
 
-      <h2 className="mt-2 text-3xl font-bold">
-        Let&apos;s Connect
-      </h2>
+      <h2 className="mt-2 text-3xl font-bold">Let&apos;s Connect</h2>
 
       <div className="mt-6 space-y-3">
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-          <span className="font-mono text-xs text-gray-500">
-            EMAIL
-          </span>
+        <a
+          href="mailto:manaswibichala@gmail.com"
+          className="block rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-emerald-400/20"
+        >
+          <span className="font-mono text-xs text-gray-500">EMAIL</span>
 
-          <p className="mt-1 text-gray-300">
-            Add your email here
+          <p className="mt-1 text-emerald-300">
+            manaswibichala@gmail.com ↗
           </p>
-        </div>
-
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-          <span className="font-mono text-xs text-gray-500">
-            LINKEDIN
-          </span>
-
-          <p className="mt-1 text-gray-300">
-            Add your LinkedIn here
-          </p>
-        </div>
+        </a>
 
         <a
           href="https://github.com/manaswi-7"
@@ -758,9 +719,7 @@ function ContactContent() {
           rel="noopener noreferrer"
           className="block rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-emerald-400/20"
         >
-          <span className="font-mono text-xs text-gray-500">
-            GITHUB
-          </span>
+          <span className="font-mono text-xs text-gray-500">GITHUB</span>
 
           <p className="mt-1 text-emerald-300">
             github.com/manaswi-7 ↗
